@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carfern2 <carfern2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 09:52:38 by carfern2          #+#    #+#             */
-/*   Updated: 2024/10/16 16:22:48 by carfern2         ###   ########.fr       */
+/*   Created: 2024/10/18 09:24:09 by carfern2          #+#    #+#             */
+/*   Updated: 2024/10/18 10:02:28 by carfern2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalnum(int c)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	if (ft_isalpha(c) || ft_isdigit(c))
-		return (1);
-	return (0);
-}
+	t_list	*result;
+	t_list	*tmp;
+	void	*res_f;
 
-/*
-int main(void)
-{
-	printf("%d", ft_isalnum('{'));
-	return (0);
+	if (!lst || !f || !del)
+		return (NULL);
+	result = NULL;
+	while (lst)
+	{
+		res_f = f(lst->content);
+		tmp = ft_lstnew(res_f);
+		if (!tmp)
+		{
+			ft_lstclear(&result, del);
+			del(res_f);
+			return (NULL);
+		}
+		ft_lstadd_back(&result, tmp);
+		lst = lst->next;
+	}
+	return (result);
 }
-*/

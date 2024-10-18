@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carfern2 <carfern2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 09:52:38 by carfern2          #+#    #+#             */
-/*   Updated: 2024/10/16 16:22:48 by carfern2         ###   ########.fr       */
+/*   Created: 2024/10/18 09:17:57 by carfern2          #+#    #+#             */
+/*   Updated: 2024/10/18 09:43:36 by carfern2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalnum(int c)
+int	ft_lstsize(t_list *lst)
 {
-	if (ft_isalpha(c) || ft_isdigit(c))
-		return (1);
-	return (0);
-}
+	int		i;
 
-/*
-int main(void)
-{
-	printf("%d", ft_isalnum('{'));
-	return (0);
+	i = 0;
+	if (lst == NULL)
+		return (0);
+	i++;
+	while (lst->next)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }
-*/
